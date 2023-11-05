@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('authors_multimedias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('author_id')->constrained('authors', 'id');
-            $table->foreignId('multimedias_id')->constrained('multimedias', 'id');
+            $table->foreignId('multimedia_id')->constrained('multimedias', 'id');
         });
     }
 
