@@ -57,8 +57,7 @@
                                 <td>
                                     @if (!empty($user->getRoleNames()))
                                         @foreach ($user->getRoleNames() as $v)
-                                        <span
-                                            class="badge bg-primary rounded-3 fw-semibold">{{ $v }}</span>
+                                            <span class="badge bg-primary rounded-3 fw-semibold">{{ $v }}</span>
                                         @endforeach
                                     @endif
                                 </td>
@@ -69,11 +68,13 @@
                                         <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}"><i
                                                 class="ti ti-edit"></i></a>
                                     @endcan
-                                    @can('user-delete')
-                                        {{ html()->form('DELETE')->route('users.destroy', $user->id)->attributes(['style' => 'display:inline'])->open() }}
-                                        {{ html()->button('<i class="ti ti-trash"></i>', 'submit')->attributes(['onclick' => "return confirm('Are you sure?')"])->class('btn btn-danger') }}
-                                        {{ html()->form()->close() }}
-                                    @endcan
+                                    @if (!in_array($user->email, config('site.default_users')))
+                                        @can('user-delete')
+                                            {{ html()->form('DELETE')->route('users.destroy', $user->id)->attributes(['style' => 'display:inline'])->open() }}
+                                            {{ html()->button('<i class="ti ti-trash"></i>', 'submit')->attributes(['onclick' => "return confirm('Are you sure?')"])->class('btn btn-danger') }}
+                                            {{ html()->form()->close() }}
+                                        @endcan
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

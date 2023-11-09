@@ -124,6 +124,12 @@ class RoleAdminController extends Controller
      */
     public function destroy($id)
     {
+        $role = Role::find($id);
+        if(in_array($role->name, config('site.default_roles'))){
+            return redirect()->route('roles.index')
+                        ->with('success','Role was not deleted successfully');
+        }
+
         DB::table("roles")->where('id',$id)->delete();
         return redirect()->route('roles.index')
                         ->with('success','Role deleted successfully');

@@ -141,7 +141,12 @@ class UserAdminController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        $user = User::find($id);
+        if(in_array($user->email, config('site.default_users'))){
+            return redirect()->route('roles.index')
+                        ->with('success','User was not deleted successfully');
+        }
+        $user ->delete();
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }

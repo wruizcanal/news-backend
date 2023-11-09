@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 {{ html()->label('Email:', 'email')->class('form-label') }}
-                {{ html()->email('email')->attribute('placeholder', 'Email')->class('form-control') }}
+                {{ html()->email('email')->attribute('placeholder', 'Email')->class('form-control')->disabled(true) }}
             </div>
             <div class="mb-3">
                 {{ html()->label('Password:', 'password')->class('form-label') }}
