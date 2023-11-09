@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('content');
             $table->enum('status', ['Saved','Published']);
             $table->tinyInteger('open_close');
-            $table->date('published_date');
+            $table->date('published_date')->nullable();
             $table->foreignId('category_id')->constrained('categories', 'id');
             $table->foreignId('cover_picture')->constrained('multimedias', 'id');
             $table->timestamps();

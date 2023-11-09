@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('title')->unique();
-            $table->string('foot');
-            $table->string('url')->unique();
+            $table->string('foot')->nullable();
+            $table->string('url');
             $table->enum('type', ['Picture','Video','Audio']);
             $table->foreignId('author_id')->constrained('authors', 'id');
             $table->timestamps();

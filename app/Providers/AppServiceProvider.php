@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 use URL;
@@ -21,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // To use Bootstrap for Pagination
+        Paginator::useBootstrapFive();
+
         // Force HTTPS for all app
          $this->app['request']->server->set('HTTPS','on');
          URL::forceScheme('https');

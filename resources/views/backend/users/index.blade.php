@@ -12,50 +12,74 @@
                 </div>
             @endif
 
-            <div class="pull-right">
+            <div class="mb-3">
                 @can('user-create')
-                    <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+                    <a class="btn btn-primary" href="{{ route('users.create') }}">Create New User</a>
                 @endcan
             </div>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Verified?</th>
-                    <th>Roles</th>
-                    <th width="280px">Action</th>
-                </tr>
-                @foreach ($data as $key => $user)
-                    <tr>
-                        <td>{{ ++$i }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ isset($user->email_verified_at) ? 'Yes' : 'No' }}</td>
-                        <td>
-                            @if (!empty($user->getRoleNames()))
-                                @foreach ($user->getRoleNames() as $role_name)
-                                    <label class="badge-success">{{ $role_name }}</label>
-                                @endforeach
-                            @endif
-                        </td>
-                        <td>
-                            <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a>
-                            @can('user-edit')
-                                <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}">Edit</a>
-                            @endcan
-                            @can('user-delete')
-                                {!! html()->form('DELETE')->route('users.destroy', $user->id)->attributes(['style' => 'display:inline'])->open() !!}
-                                {!! html()->button('Delete', 'submit')->class('btn btn-danger') !!}
-                                {!! html()->form()->close() !!}
-                            @endcan
-                        </td>
-                    </tr>
-                @endforeach
-            </table>
-
-            {!! $data->render() !!}
+            <div class="table-responsive">
+                <table class="table text-nowrap mb-0 align-middle">
+                    <thead class="text-dark fs-4">
+                        <tr>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Name</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Email</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Verified</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Roles</h6>
+                            </th>
+                            <th class="border-bottom-0">
+                                <h6 class="fw-semibold mb-0">Action</h6>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $key => $user)
+                            <tr>
+                                <td class="border-bottom-0">
+                                    <h6 class="fw-normal mb-0">{{ $user->name }}</h6>
+                                </td>
+                                <td class="border-bottom-0">
+                                    <h6 class="fw-normal mb-0">{{ $user->email }}</h6>
+                                </td>
+                                <td class="border-bottom-0">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span
+                                            class="badge {{ isset($user->email_verified_at) == 1 ? 'bg-success' : 'bg-danger' }} rounded-3 fw-semibold">{{ isset($user->email_verified_at) ? 'Yes' : 'No' }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (!empty($user->getRoleNames()))
+                                        @foreach ($user->getRoleNames() as $v)
+                                        <span
+                                            class="badge bg-primary rounded-3 fw-semibold">{{ $v }}</span>
+                                        @endforeach
+                                    @endif
+                                </td>
+                                <td class="border-bottom-0">
+                                    <a class="btn btn-info" href="{{ route('users.show', $user->id) }}"><i
+                                            class="ti ti-eye"></i></a>
+                                    @can('user-edit')
+                                        <a class="btn btn-primary" href="{{ route('users.edit', $user->id) }}"><i
+                                                class="ti ti-edit"></i></a>
+                                    @endcan
+                                    @can('user-delete')
+                                        {{ html()->form('DELETE')->route('users.destroy', $user->id)->attributes(['style' => 'display:inline'])->open() }}
+                                        {{ html()->button('<i class="ti ti-trash"></i>', 'submit')->attributes(['onclick' => "return confirm('Are you sure?')"])->class('btn btn-danger') }}
+                                        {{ html()->form()->close() }}
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforeach
+                </table>
+                {{ $data->render() }}
+            </div>
         </div>
     </div>
 @endsection

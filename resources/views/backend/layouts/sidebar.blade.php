@@ -27,22 +27,76 @@
                     </a>
                 </li>
 
-                @if (true)
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">BUSINESS</span>
+
+                <li class="nav-small-cap">
+                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                    <span class="hide-menu">BUSINESS</span>
+                </li>
+                @can('author-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('authors.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-users"></i>
+                            </span>
+                            <span class="hide-menu">Authors</span>
+                        </a>
                     </li>
-                    @can('client-list')
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('clients.index') }}" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-users"></i>
-                                </span>
-                                <span class="hide-menu">Clients</span>
-                            </a>
-                        </li>
-                    @endcan
-                @endif
+                @endcan
+
+                @can('category-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('categories.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-category"></i>
+                            </span>
+                            <span class="hide-menu">Categories</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('multimedia-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('multimedias.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-photo"></i>
+                            </span>
+                            <span class="hide-menu">Multimedias</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('gallery-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('galleries.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-photo"></i>
+                            </span>
+                            <span class="hide-menu">Galleries</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('news-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('news.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-message"></i>
+                            </span>
+                            <span class="hide-menu">News</span>
+                        </a>
+                    </li>
+                @endcan
+
+                @can('comment-list')
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('comments.index') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Coments</span>
+                        </a>
+                    </li>
+                @endcan
 
                 @if (Auth::user()->can('user-list') || Auth::user()->can('role-list'))
                     <li class="nav-small-cap">

@@ -3,14 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DashboardAdminController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * Summary of __construct
      */
     public function __construct()
     {
@@ -19,8 +16,7 @@ class DashboardAdminController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {

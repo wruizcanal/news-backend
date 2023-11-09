@@ -11,7 +11,18 @@ class Comment extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     * @var array
+     */
+    protected $fillable = [
+        'author',
+        'content',
+        'status',
+    ];
+
+    /**
      * Get the news that owns the comment.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function news(): BelongsTo
     {
